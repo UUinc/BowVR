@@ -10,10 +10,18 @@ public class Arrow : MonoBehaviour
     private bool inAir = false;
     private Vector3 lastPosition = Vector3.zero;
 
+    private AudioSource audioSource;
+
+    private ParticleSystem particle;
+    private TrailRenderer trailRenderer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        particle = GetComponentInChildren<ParticleSystem>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
         PullInteraction.PullActionReleased += Release;
 
         Stop();
@@ -35,6 +43,9 @@ public class Arrow : MonoBehaviour
         rb.AddForce(force, ForceMode.Impulse);
         StartCoroutine(RotateWithVelocity());
         lastPosition = tip.position;
+
+        particle.Play();
+        trailRenderer.emitting = true;
     }
 
     private IEnumerator RotateWithVelocity()
@@ -50,7 +61,7 @@ public class Arrow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(inAir)
+        if (inAir)
         {
             CheckCollision();
             lastPosition = tip.position;
@@ -59,17 +70,20 @@ public class Arrow : MonoBehaviour
 
     private void CheckCollision()
     {
-        if(Physics.Linecast(lastPosition, tip.position, out RaycastHit hitInfo))
+        if (Physics.Linecast(lastPosition, tip.position, out RaycastHit hitInfo))
         {
-            if(hitInfo.transform.gameObject.layer != 8)
+            if (hitInfo.transform.gameObject.layer != 8)
             {
-                if(hitInfo.transform.TryGetComponent(out Rigidbody body))
+                if (hitInfo.transform.TryGetComponent(out Rigidbody body))
                 {
                     rb.interpolation = RigidbodyInterpolation.None;
                     transform.parent = hitInfo.transform;
                     body.AddForce(rb.velocity, ForceMode.Impulse);
                 }
                 Stop();
+
+                //hit sfx
+                PlayHitArrow();
             }
         }
     }
@@ -78,11 +92,19 @@ public class Arrow : MonoBehaviour
     {
         inAir = false;
         SetPhysics(false);
+
+        particle.Stop();
+        trailRenderer.emitting = false;
     }
 
     private void SetPhysics(bool usePhysics)
     {
         rb.useGravity = usePhysics;
         rb.isKinematic = !usePhysics;
+    }
+
+    private void PlayHitArrow()
+    {
+        audioSource.Play();
     }
 }

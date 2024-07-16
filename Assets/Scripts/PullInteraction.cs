@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Feedback;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class PullInteraction : XRBaseInteractable
 {
@@ -15,10 +18,13 @@ public class PullInteraction : XRBaseInteractable
     private LineRenderer lineRenderer;
     private IXRSelectInteractor pullingInteractor = null;
 
+    private AudioSource pullAudioSource;
+
     protected override void Awake()
     {
         base.Awake();
         lineRenderer = GetComponent<LineRenderer>();
+        pullAudioSource = GetComponent<AudioSource>();
     }
 
     public void SetPullInteractor(SelectEnterEventArgs args)
@@ -33,6 +39,8 @@ public class PullInteraction : XRBaseInteractable
         pullAmount = 0.0f;
         notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, 0);
         UpdateString();
+
+        PlayReleaseSound();
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -46,6 +54,8 @@ public class PullInteraction : XRBaseInteractable
                 pullAmount = CalculatePull(pullPosition);
 
                 UpdateString();
+
+                HapticFeedback();
             }
         }
     }
@@ -66,5 +76,21 @@ public class PullInteraction : XRBaseInteractable
         Vector3 linePosition = Vector3.forward * Mathf.Lerp(start.transform.localPosition.z, end.transform.localPosition.z, pullAmount);
         notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, linePosition.z + 0.2f);
         lineRenderer.SetPosition(1, linePosition);
+    }
+
+    private void HapticFeedback()
+    {
+        if(pullingInteractor != null)
+        {
+            Debug.Log("Haptic Feedback: " + pullingInteractor.transform.gameObject.name);
+
+            SimpleHapticFeedback haptic = pullingInteractor.transform.gameObject.GetComponent<SimpleHapticFeedback>();
+            haptic.hapticImpulsePlayer.SendHapticImpulse(pullAmount, 0.1f);
+        }
+    }
+
+    private void PlayReleaseSound()
+    {
+        pullAudioSource.Play();
     }
 }
