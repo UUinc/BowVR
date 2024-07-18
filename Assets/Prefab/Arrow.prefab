@@ -5019,8 +5019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de19a641127ca4042851b096d685cf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
   tip: {fileID: 1769337598482281036}
+  targetPoint: {fileID: 6328305169276392924, guid: 5fee817b00e9eff4492dfdf747eb0a96,
+    type: 3}
 --- !u!82 &3478046714027570775
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5315,7 +5317,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: arrow1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2387773517637118087, guid: 8f0321563d0cd2040a49a3735073c9b9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -68,7 +68,7 @@ public class PullInteraction : XRBaseInteractable
 
         targetDirection.Normalize();
         float pullValue = Vector3.Dot(pullDirection, targetDirection) / maxLength;
-        return Mathf.Clamp(pullValue, 0, 1);
+        return Mathf.Clamp(pullValue, 0.0f, 1.0f);
     }
 
     private void UpdateString()
@@ -80,10 +80,8 @@ public class PullInteraction : XRBaseInteractable
 
     private void HapticFeedback()
     {
-        if(pullingInteractor != null)
+        if (pullingInteractor != null)
         {
-            Debug.Log("Haptic Feedback: " + pullingInteractor.transform.gameObject.name);
-
             SimpleHapticFeedback haptic = pullingInteractor.transform.gameObject.GetComponent<SimpleHapticFeedback>();
             haptic.hapticImpulsePlayer.SendHapticImpulse(pullAmount, 0.1f);
         }

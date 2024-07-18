@@ -5,6 +5,7 @@ public class Arrow : MonoBehaviour
 {
     public float speed = 10f;
     public Transform tip;
+    public GameObject targetPoint;
 
     private Rigidbody rb;
     private bool inAir = false;
@@ -84,6 +85,17 @@ public class Arrow : MonoBehaviour
 
                 //hit sfx
                 PlayHitArrow();
+
+                if (hitInfo.collider.CompareTag("Target"))
+                {
+                    var tmpTarget = Instantiate(targetPoint, hitInfo.transform);
+                    tmpTarget.transform.position = hitInfo.transform.position;
+                    Debug.Log(tmpTarget.transform.position);
+                    Debug.Log(hitInfo.transform.position);
+                }
+
+                //Self destroy after 10s
+                Destroy(gameObject, 10f);
             }
         }
     }
@@ -106,5 +118,11 @@ public class Arrow : MonoBehaviour
     private void PlayHitArrow()
     {
         audioSource.Play();
+    }
+
+    private int CercleHit(Vector3 hitPosition)
+    {
+        
+        return 0;
     }
 }

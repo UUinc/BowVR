@@ -135,6 +135,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
         type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -222,6 +227,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2022364575}
     m_Modifications:
+    - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -799,6 +809,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2022364575}
     m_Modifications:
+    - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1811,6 +1826,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2022364575}
     m_Modifications:
+    - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3668,6 +3688,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2022364575}
     m_Modifications:
+    - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 2508170062171312173, guid: 828ac4719e6607b41b44601a5993e0d7,
         type: 3}
       propertyPath: m_StaticEditorFlags
